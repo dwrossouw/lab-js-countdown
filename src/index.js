@@ -1,6 +1,7 @@
 const DURATION = 10; // 10 seconds
 let remainingTime = DURATION; // Countdown starting from 10
 let timer = null; // Variable to store the interval
+let messageToast = "";
 
 // ITERATION 1: Add event listener to the start button
 
@@ -34,11 +35,12 @@ function startCountdown() {
 }
 
 // ITERATION 3: Show Toast
-function showToast(message) {
-  let toastId = document.querySelector("#toast");
-  let toastMessageId = document.querySelector("#toast-message");
-  let toastCloseId = document.querySelector("#close-toast");
 
+let toastId = document.querySelector("#toast");
+let toastMessageId = document.querySelector("#toast-message");
+let toastCloseId = document.querySelector("#close-toast");
+
+function showToast(message) {
   toastId.classList.add("show");
   toastMessageId.innerText = `${message}`;
 
@@ -50,17 +52,14 @@ function showToast(message) {
     }
   }, 3000);
 
-  toastCloseId.onclick = () => {
-    toastId.classList.remove("show");
-    if (message === "Lift off! 🚀") {
-      resetCountdown();
-    }
-  };
-
   // BONUS: ITERATION 4: TOAST CLOSE BUTTON
   toastCloseId.addEventListener("click", () => {
     toastId.classList.remove("show");
-    resetCountdown();
+    if (message === "Lift off! 🚀") {
+      resetCountdown();
+      message = "⏰ Final countdown! ⏰";
+    }
+   
   });
 }
 
